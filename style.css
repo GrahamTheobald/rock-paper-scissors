@@ -1,0 +1,71 @@
+div {
+    border: solid black 2px;
+    border-radius: 5px;
+
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#gui {
+    width: 600px;
+    height: 300px;
+    margin: auto;
+
+    padding: 10px;
+    margin-top: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    background-color: cadetblue;
+}
+
+#results {
+    padding: 10px;
+
+    background-color:darkslategray;
+
+}
+
+#buttons {
+    display:flex;
+    justify-content: space-evenly;
+
+    padding: 10px;
+    background-color:darkslategray;
+
+}
+
+.button,
+#reset {
+    background-color: whitesmoke;
+    border-radius: 10px;
+
+    border-color: indianred;
+}
+
+#reset {
+    display: none;
+    margin: 5px;
+}
+#score {
+    display:flex;
+    justify-content: space-between;
+    margin: 0 20px 20px 20px;
+    padding: 0 20px;
+
+    background-color: silver;
+}
+
+#messages {
+    background-color: silver;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+
+span {
+    font-size:large;
+    font-weight:bold;
+}

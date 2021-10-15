@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+let play = true;
 
 function computerPlay() {
     let options = ['rock', 'paper', 'scissors']
@@ -18,8 +19,10 @@ function playerSelection() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    const message = document.querySelector("#message");
+
     if (playerSelection === computerSelection) {
-        console.log("It's a draw!")
+        message.textContent = `It's a draw!`;
     }
 
     if (
@@ -27,8 +30,11 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'paper' && computerSelection === 'scissors') ||
         (playerSelection === 'scissors' && computerSelection === 'rock') 
     ) {
-        computerScore ++
-        console.log(`You Lost! ${computerSelection} beats ${playerSelection}`)
+        computerScore ++;
+        const score = document.querySelector("#computer-score");
+        score.textContent = computerScore;
+        message.textContent = `You Lost! ${computerSelection} beats ${playerSelection}`;
+        checkScore();
     }
 
     if (
@@ -36,22 +42,52 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'rock' && computerSelection === 'scissors') ||
         (playerSelection === 'scissors' && computerSelection === 'paper') 
     ) {
-        playerScore ++ 
-        console.log(`You Won! ${playerSelection} beats ${computerSelection}`)
+        playerScore ++;
+        const score = document.querySelector("#player-score");
+        score.textContent = playerScore;
+        message.textContent = `You Won! ${playerSelection} beats ${computerSelection}`;
+        checkScore();
     }
 }
 
-function game() {
-    for (let index = 0; index < 5; index++) {
-        playRound(playerSelection(), computerPlay());        
+function checkScore(){
+    const message = document.querySelector("#message");
+    const reset = document.querySelector('#reset');
+    if (playerScore >= 5){
+        message.textContent = `Congratulations! You won the game!`;
+        reset.setAttribute('style', 'display: block');
+        play = false;
     }
 
-    if (playerScore > computerScore) {
-        console.log("Congratulations! You are the winner after 5 rounds!")
-    }
-    else {
-        console.log("Comiserations! The computer defeated you after 5 rounds!")
+    if (computerScore >= 5){
+        message.textContent = `Comiserations! You lost the game!`;
+        reset.setAttribute('style', 'display:block');
+        play = false;
     }
 }
 
-game()
+function resetGame(){
+    playerScore = 0;
+    document.querySelector("#player-score").textContent = 0;
+    computerScore = 0;
+    document.querySelector("#computer-score").textContent = 0;
+    document.querySelector("#message").textContent = `Click a button to begin`
+    document.querySelector("#reset").setAttribute('style', 'display:none')
+    play = true;
+
+}
+
+const buttons = document.querySelectorAll(".button");
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (play) {
+            playRound(button.id, computerPlay());
+        }
+    })
+
+})
+
+const reset = document.querySelector("#reset");
+
+reset.addEventListener('click', resetGame)
